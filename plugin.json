@@ -7,8 +7,8 @@
   "pluginIcon": "icon_plugin_md.png",
   "price": 0.00,
   "marketplaceName": {
-    "de": "Google Shopping",
-    "en": "Google Shopping"
+    "de": "BW Google Shopping",
+    "en": "BW Google Shopping"
   },
   "description": "This plugin adds the format GoogleShopping to the Elastic Export.",
   "shortDescription": {
