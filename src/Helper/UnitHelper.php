@@ -1,6 +1,6 @@
 <?php
 
-namespace ElasticExportGoogleShopping\Helper;
+namespace BwElasticExportGoogleShopping\Helper;
 
 class UnitHelper
 {

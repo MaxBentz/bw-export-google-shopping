@@ -1,6 +1,6 @@
 <?php
 
-namespace ElasticExportGoogleShopping\Helper;
+namespace BwElasticExportGoogleShopping\Helper;
 
 use Plenty\Legacy\Repositories\Item\SalesPrice\SalesPriceSearchRepository;
 use Plenty\Modules\Helper\Models\KeyValue;

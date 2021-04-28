@@ -1,11 +1,11 @@
 <?php
 
-namespace ElasticExportGoogleShopping;
+namespace BwElasticExportGoogleShopping;
 
 use Plenty\Modules\DataExchange\Services\ExportPresetContainer;
 use Plenty\Plugin\DataExchangeServiceProvider;
 
-class ElasticExportGoogleShoppingServiceProvider extends DataExchangeServiceProvider
+class BwElasticExportGoogleShoppingServiceProvider extends DataExchangeServiceProvider
 {
 	public function register()
 	{
@@ -15,8 +15,8 @@ class ElasticExportGoogleShoppingServiceProvider extends DataExchangeServiceProv
 	{
 		$container->add(
 			'GoogleShopping-Plugin',
-			'ElasticExportGoogleShopping\ResultField\GoogleShopping',
-			'ElasticExportGoogleShopping\Generator\GoogleShopping',
+			'BwElasticExportGoogleShopping\ResultField\GoogleShopping',
+			'BwElasticExportGoogleShopping\Generator\GoogleShopping',
             '',
 			true,
             true

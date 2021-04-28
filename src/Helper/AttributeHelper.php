@@ -1,9 +1,9 @@
 <?php
 
-namespace ElasticExportGoogleShopping\Helper;
+namespace BwElasticExportGoogleShopping\Helper;
 
 use ElasticExport\Helper\ElasticExportPropertyHelper;
-use ElasticExportGoogleShopping\Generator\GoogleShopping;
+use BwElasticExportGoogleShopping\Generator\GoogleShopping;
 use Plenty\Modules\Helper\Models\KeyValue;
 use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
 use Plenty\Modules\Item\Attribute\Contracts\AttributeValueNameRepositoryContract;

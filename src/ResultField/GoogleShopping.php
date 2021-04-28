@@ -1,6 +1,6 @@
 <?php
 
-namespace ElasticExportGoogleShopping\ResultField;
+namespace BwElasticExportGoogleShopping\ResultField;
 
 use Plenty\Modules\DataExchange\Contracts\ResultFields;
 use Plenty\Modules\DataExchange\Models\FormatSetting;
