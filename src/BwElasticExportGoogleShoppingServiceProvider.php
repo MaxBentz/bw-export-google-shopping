@@ -14,7 +14,7 @@ class BwElasticExportGoogleShoppingServiceProvider extends DataExchangeServicePr
 	public function exports(ExportPresetContainer $container)
 	{
 		$container->add(
-			'GoogleShopping-Plugin',
+			'BW-GoogleShopping-Plugin',
 			'BwElasticExportGoogleShopping\ResultField\GoogleShopping',
 			'BwElasticExportGoogleShopping\Generator\GoogleShopping',
             '',
