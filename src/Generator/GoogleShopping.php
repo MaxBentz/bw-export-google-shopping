@@ -349,9 +349,9 @@ class GoogleShopping extends CSVPluginGenerator
     ];
 
         foreach ($variation['data']['attributes'] as $attributeValue) {
-            if (isset($attributeValue['attributeId']) && $attributeValue['attributeId'] === 138 && array_key_exists($attributeValue['valueId'], $conditionAttrList)) {
+            if (isset($attributeValue['attributeId']) && $attributeValue['attributeId'] == 138 && array_key_exists($attributeValue['valueId'], $conditionAttrList)) {
                 $value_id = $attributeValue['valueId'];
-                $condition = $conditionAttrList["$value_id"];
+                $condition = $conditionAttrList[$value_id];
                 break;
             }
         }
