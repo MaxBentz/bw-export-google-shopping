@@ -346,12 +346,15 @@ class GoogleShopping extends CSVPluginGenerator
         2667 => 'used',
         2666 => 'used',
         2665 => 'new'
-    ];
+        ];
 
         foreach ($variation['data']['attributes'] as $attributeValue) {
             if (isset($attributeValue['attributeId']) && $attributeValue['attributeId'] == 138 && array_key_exists($attributeValue['valueId'], $conditionAttrList)) {
                 $value_id = $attributeValue['valueId'];
                 $condition = $conditionAttrList[$value_id];
+
+                $this->getLogger(__METHOD__)->error('BwElasticExportGoogleShopping::logs.fillRowError', [$value_id]);
+
                 break;
             }
         }
