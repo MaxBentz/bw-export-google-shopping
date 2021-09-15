@@ -2,7 +2,7 @@
   "name": "BwElasticExportGoogleShopping",
   "namespace": "BwElasticExportGoogleShopping",
   "type": "export",
-  "version": "1.2.11",
+  "version": "2.0.0",
   "license": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007",
   "pluginIcon": "icon_plugin_md.png",
   "price": 0.00,
@@ -10,7 +10,7 @@
     "de": "BW Google Shopping",
     "en": "BW Google Shopping"
   },
-  "description": "This plugin adds the format GoogleShopping to the Elastic Export.",
+  "description": "This plugin adds the format GoogleShopping to the Elastic Export. 1.2.11",
   "shortDescription": {
     "de": "Die Integration des Datenformats GoogleShopping-Plugin ermöglicht die Artikeldatenübertragung zum Preisportal Google Shopping über den elastischen Export.",
     "en": "The integration of the data format GoogleShopping-Plugin enables the transfer of item data to the price search engine Google Shopping via the elastic export."
