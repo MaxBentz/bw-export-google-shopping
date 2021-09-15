@@ -359,6 +359,16 @@ class GoogleShopping extends CSVPluginGenerator
             $condition = $this->getCondition($variation['data']['item']['conditionApi']['id']);
         }
 
+        $color = $variationAttributes[self::CHARACTER_TYPE_COLOR];
+        if (empty($color)) {
+            $this->elasticExportItemHelper->getFreeFields($variation['data']['item']['id'], 3);
+        }
+
+        $size = $variationAttributes[self::CHARACTER_TYPE_SIZE];
+        if(empty($size)){
+            $this->elasticExportItemHelper->getFreeFields($variation['data']['item']['id'], 5);
+        }
+
         $data = [
             'id' => $this->elasticExportHelper->generateSku($variation['id'], self::GOOGLE_SHOPPING, 0, $variation['data']['skus']['sku']),
             'title' => $this->elasticExportHelper->getMutatedName($variation, $settings, 256),
@@ -376,8 +386,8 @@ class GoogleShopping extends CSVPluginGenerator
             'gtin' => $this->elasticExportHelper->getBarcodeByType($variation, $settings->get('barcode')),
             'isbn' => $this->elasticExportHelper->getBarcodeByType($variation, ElasticExportCoreHelper::BARCODE_ISBN),
             'mpn' => $variation['data']['variation']['model'],
-            'color' => $variationAttributes[self::CHARACTER_TYPE_COLOR],
-            'size' => $variationAttributes[self::CHARACTER_TYPE_SIZE],
+            'color' => $color,
+            'size' => $size,
             'material' => $variationAttributes[self::CHARACTER_TYPE_MATERIAL],
             'pattern' => $variationAttributes[self::CHARACTER_TYPE_PATTERN],
             'item_group_id' => $variation['data']['item']['id'],
