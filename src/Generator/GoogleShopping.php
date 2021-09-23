@@ -360,12 +360,12 @@ class GoogleShopping extends CSVPluginGenerator
         }
 
         $color = $variationAttributes[self::CHARACTER_TYPE_COLOR];
-        if (empty($color)) {
+        if (empty($color) or $color === "") {
             $this->elasticExportItemHelper->getFreeFields($variation['data']['item']['id'], 3);
         }
 
         $size = $variationAttributes[self::CHARACTER_TYPE_SIZE];
-        if(empty($size)){
+        if(empty($size) or $size === ""){
             $this->elasticExportItemHelper->getFreeFields($variation['data']['item']['id'], 5);
         }
 
