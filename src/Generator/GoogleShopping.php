@@ -137,10 +137,10 @@ class GoogleShopping extends CSVPluginGenerator
      * @param VariationExportServiceContract $variationExportService
      */
     public function __construct(
-        ArrayHelper $arrayHelper,
-        AttributeHelper $attributeHelper,
-        PriceHelper $priceHelper,
-        ImageHelper $imageHelper,
+        ArrayHelper                    $arrayHelper,
+        AttributeHelper                $attributeHelper,
+        PriceHelper                    $priceHelper,
+        ImageHelper                    $imageHelper,
         VariationExportServiceContract $variationExportService
     )
     {
@@ -161,7 +161,7 @@ class GoogleShopping extends CSVPluginGenerator
         $this->elasticExportPriceHelper = pluginApp(ElasticExportPriceHelper::class);
         $this->elasticExportStockHelper = pluginApp(ElasticExportStockHelper::class);
         $this->elasticExportHelper = pluginApp(ElasticExportCoreHelper::class);
-        $this->elasticExportItemHelper = pluginApp(ElasticExportItemHelper::class);
+        $this->elasticExportItemHelper = pluginApp(ElasticExportItemHelper::class, [1 => true]);
         $this->elasticExportPropertyHelper = pluginApp(ElasticExportPropertyHelper::class);
         $this->priceDetectionService = pluginApp(PriceDetectionService::class);
 
@@ -324,28 +324,28 @@ class GoogleShopping extends CSVPluginGenerator
 
         $condition = "";
         $conditionAttrList = [
-        8189 => 'used',
-        8188 => 'used',
-        7564 => 'refurbished',
-        7563 => 'refurbished',
-        7562 => 'new',
-        3083 => 'used',
-        3067 => 'used',
-        3065 => 'new',
-        3063 => 'used',
-        3061 => 'used',
-        3060 => 'used',
-        2916 => 'refurbished',
-        2915 => 'used',
-        2779 => 'used',
-        2730 => 'used',
-        2703 => 'used',
-        2702 => 'used',
-        2669 => 'used',
-        2668 => 'used',
-        2667 => 'used',
-        2666 => 'used',
-        2665 => 'new'
+            8189 => 'used',
+            8188 => 'used',
+            7564 => 'refurbished',
+            7563 => 'refurbished',
+            7562 => 'new',
+            3083 => 'used',
+            3067 => 'used',
+            3065 => 'new',
+            3063 => 'used',
+            3061 => 'used',
+            3060 => 'used',
+            2916 => 'refurbished',
+            2915 => 'used',
+            2779 => 'used',
+            2730 => 'used',
+            2703 => 'used',
+            2702 => 'used',
+            2669 => 'used',
+            2668 => 'used',
+            2667 => 'used',
+            2666 => 'used',
+            2665 => 'new'
         ];
 
         foreach ($variation['data']['attributes'] as $attributeValue) {
@@ -365,13 +365,27 @@ class GoogleShopping extends CSVPluginGenerator
         }
 
         $size = $variationAttributes[self::CHARACTER_TYPE_SIZE];
-        if(empty($size) or $size === ""){
+        if (empty($size) or $size === "") {
             $this->elasticExportItemHelper->getFreeFields($variation['data']['item']['id'], 5);
+        }
+
+        $additionalData = "";
+        if ((!empty($color) and $color !== "") or (!empty($size) or $size !== "")) {
+            $additionalData = " | ";
+
+            if ((!empty($color) and $color !== "") and (!empty($size) or $size !== "")){
+                $additionalData .= $color.", ".$size;
+            }
+            elseif (!empty($color) and $color !== "") {
+                $additionalData .= $color;
+            } else {
+                $additionalData .= $size;
+            }
         }
 
         $data = [
             'id' => $this->elasticExportHelper->generateSku($variation['id'], self::GOOGLE_SHOPPING, 0, $variation['data']['skus']['sku']),
-            'title' => $this->elasticExportHelper->getMutatedName($variation, $settings, 256),
+            'title' => $this->elasticExportHelper->getMutatedName($variation, $settings, 256).$additionalData,
             'description' => $this->getDescription($variation, $settings),
             'google_product_category' => $this->elasticExportHelper->getCategoryMarketplace((int)$variation['data']['defaultCategories'][0]['id'], (int)$settings->get('plentyId'), 129),
             'product_type' => $this->elasticExportHelper->getCategory((int)$variation['data']['defaultCategories'][0]['id'], (string)$settings->get('lang'), (int)$settings->get('plentyId')),
