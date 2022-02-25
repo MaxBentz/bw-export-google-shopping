@@ -360,14 +360,7 @@ class GoogleShopping extends CSVPluginGenerator
         }
 
         $color = $variationAttributes[self::CHARACTER_TYPE_COLOR];
-        if (empty($color)) {
-            $color = $this->elasticExportItemHelper->getFreeFields($variation['data']['item']['id'], 3);
-        }
-
         $size = $variationAttributes[self::CHARACTER_TYPE_SIZE];
-        if (empty($size)) {
-            $size = $this->elasticExportItemHelper->getFreeFields($variation['data']['item']['id'], 5);
-        }
 
         $additionalData = "";
         if ((!empty($color)) or (!empty($size))) {
@@ -381,6 +374,14 @@ class GoogleShopping extends CSVPluginGenerator
             } else {
                 $additionalData .= $size;
             }
+        }
+
+        if (empty($size)) {
+            $size = $this->elasticExportItemHelper->getFreeFields($variation['data']['item']['id'], 5);
+        }
+
+        if (empty($color)) {
+            $color = $this->elasticExportItemHelper->getFreeFields($variation['data']['item']['id'], 3);
         }
 
         $data = [
