@@ -377,11 +377,11 @@ class GoogleShopping extends CSVPluginGenerator
         }
 
         if (empty($size)) {
-            $size = $this->elasticExportItemHelper->getFreeFields($variation['data']['item']['id'], 5);
+            $size = strip_tags($this->elasticExportItemHelper->getFreeFields($variation['data']['item']['id'], 5));
         }
 
         if (empty($color)) {
-            $color = $this->elasticExportItemHelper->getFreeFields($variation['data']['item']['id'], 3);
+            $color = strip_tags($this->elasticExportItemHelper->getFreeFields($variation['data']['item']['id'], 3));
         }
 
         $data = [
