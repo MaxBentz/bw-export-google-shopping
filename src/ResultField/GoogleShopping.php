@@ -156,6 +156,10 @@ class GoogleShopping extends ResultFields
 				'variation.releasedAt',
                 'variation.stockLimitation',
                 'variation.weightG',
+                'variation.weightNetG',
+                'variation.widthMM',
+                'variation.lengthMM',
+                'variation.heightMM',
 
                 // Images
                 'images.all.urlMiddle',
@@ -251,6 +255,10 @@ class GoogleShopping extends ResultFields
 			'variation.releasedAt',
 			'variation.stockLimitation',
 			'variation.weightG',
+            'variation.weightNetG',
+            'variation.widthMM',
+            'variation.lengthMM',
+            'variation.heightMM',
 
 			// Unit
 			'unit.content',

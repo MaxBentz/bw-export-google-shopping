@@ -366,13 +366,13 @@ class GoogleShopping extends CSVPluginGenerator
         $additionalData = "";
         $delimiter = "|";
 
-        if(!empty($color)){
+        if (!empty($color)) {
             $additionalData .= $delimiter . " " . $color;
         }
-        if(!empty($size)){
+        if (!empty($size)) {
             $additionalData .= $delimiter . " " . $size;
         }
-        if(!empty($pattern)){
+        if (!empty($pattern)) {
             $additionalData .= $delimiter . " " . $pattern;
         }
 
@@ -384,6 +384,25 @@ class GoogleShopping extends CSVPluginGenerator
 
         if (empty($color)) {
             $color = strip_tags(str_replace($breaks, " ", $this->elasticExportItemHelper->getFreeFields($variation['data']['item']['id'], 3)));
+        }
+        $product_length = "";
+        $product_width = "";
+        $product_height = "";
+        $product_weight = "";
+        if ($variation['data']['variation']['lengthMM'] > 0) {
+            $product_length = $variation['data']['variation']['lengthMM'] / 10;
+            $product_length = $product_length . " cm";
+        }
+        if ($variation['data']['variation']['widthMM'] > 0) {
+            $product_width = $variation['data']['variation']['widthMM'] / 10;
+            $product_width = $product_width . " cm";
+        }
+        if ($variation['data']['variation']['heightMM'] > 0) {
+            $product_height = $variation['data']['variation']['heightMM'] / 10;
+            $product_height = $product_height . " cm";
+        }
+        if ($variation['data']['variation']['weightNetG'] > 0) {
+            $product_weight = $variation['data']['variation']['weightNetG'] . " g";
         }
 
         $data = [
@@ -410,6 +429,10 @@ class GoogleShopping extends CSVPluginGenerator
             'item_group_id' => $variation['data']['item']['id'],
             'shipping' => $shipping,
             'shipping_weight' => $variation['data']['variation']['weightG'] . ' g',
+            'product_length' => $product_length,
+            'product_width' => $product_width,
+            'product_height' => $product_height,
+            'product_weight' => $product_weight,
             'gender' => $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_GENDER, self::GOOGLE_SHOPPING, $settings->get('lang')),
             'age_group' => $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_AGE_GROUP, self::GOOGLE_SHOPPING, $settings->get('lang')),
             'excluded_destination' => $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_EXCLUDED_DESTINATION, self::GOOGLE_SHOPPING, $settings->get('lang')),
@@ -536,6 +559,10 @@ class GoogleShopping extends CSVPluginGenerator
             'item_group_id',
             'shipping',
             'shipping_weight',
+            'product_length',
+            'product_width',
+            'product_height',
+            'product_weight',
             'gender',
             'age_group',
             'excluded_destination',
