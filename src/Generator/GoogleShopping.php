@@ -402,7 +402,12 @@ class GoogleShopping extends CSVPluginGenerator
             $product_height = $product_height . " cm";
         }
         if ($variation['data']['variation']['weightNetG'] > 0) {
-            $product_weight = $variation['data']['variation']['weightNetG'] . " g";
+            if($variation['data']['variation']['weightNetG'] < 2000){
+                $product_weight = $variation['data']['variation']['weightNetG'] . " g";
+            }
+            else{
+                $product_weight = $variation['data']['variation']['weightNetG'] / 1000 . " kg";
+            }
         }
 
         $data = [
