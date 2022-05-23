@@ -364,7 +364,7 @@ class GoogleShopping extends CSVPluginGenerator
         $pattern = $variationAttributes[self::CHARACTER_TYPE_PATTERN];
 
         $additionalData = "";
-        $delimiter = "|";
+        $delimiter = " |";
 
         if (!empty($color)) {
             $additionalData .= $delimiter . " " . $color;
@@ -412,7 +412,7 @@ class GoogleShopping extends CSVPluginGenerator
 
         $data = [
             'id' => $this->elasticExportHelper->generateSku($variation['id'], self::GOOGLE_SHOPPING, 0, $variation['data']['skus']['sku']),
-            'title' => $this->elasticExportHelper->getMutatedName($variation, $settings, 256) . " " . $additionalData,
+            'title' => $this->elasticExportHelper->getMutatedName($variation, $settings, 256) . $additionalData,
             'description' => $this->getDescription($variation, $settings),
             'google_product_category' => $this->elasticExportHelper->getCategoryMarketplace((int)$variation['data']['defaultCategories'][0]['id'], (int)$settings->get('plentyId'), 129),
             'product_type' => $this->elasticExportHelper->getCategory((int)$variation['data']['defaultCategories'][0]['id'], (string)$settings->get('lang'), (int)$settings->get('plentyId')),
