@@ -10,7 +10,6 @@ use ElasticExport\Services\FiltrationService;
 use ElasticExport\Services\PriceDetectionService;
 use BwElasticExportGoogleShopping\Helper\AttributeHelper;
 use BwElasticExportGoogleShopping\Helper\PriceHelper;
-use Plenty\Legacy\Services\Item\Variation\DetectSalesPriceService;
 use Plenty\Modules\DataExchange\Contracts\CSVPluginGenerator;
 use Plenty\Modules\Helper\Services\ArrayHelper;
 use ElasticExport\Helper\ElasticExportCoreHelper;
@@ -18,8 +17,6 @@ use Plenty\Modules\Helper\Models\KeyValue;
 use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchScrollRepositoryContract;
 use Plenty\Modules\Item\Variation\Contracts\VariationExportServiceContract;
 use Plenty\Modules\Item\Variation\Services\ExportPreloadValue\ExportPreloadValue;
-use Plenty\Modules\Order\Currency\Contracts\CurrencyRepositoryContract;
-use Plenty\Modules\Order\Currency\Models\Currency;
 use Plenty\Plugin\Log\Loggable;
 use BwElasticExportGoogleShopping\Helper\ImageHelper;
 
@@ -195,7 +192,7 @@ class GoogleShopping extends CSVPluginGenerator
                 $resultList = $elasticSearch->execute();
                 $shardIterator++;
 
-                if (count($resultList['error']) > 0) {
+                if(count($resultList['error'] ?? []) > 0)
                     $this->getLogger(__METHOD__)
                         ->addReference('failedShard', $shardIterator)
                         ->error('BwElasticExportGoogleShopping::log.esError', [
@@ -261,7 +258,7 @@ class GoogleShopping extends CSVPluginGenerator
                 }
             } while ($elasticSearch->hasNext());
 
-            if (is_array($this->errorBatch) && count($this->errorBatch['rowError'])) {
+        if(is_array($this->errorBatch) && count($this->errorBatch['rowError'] ?? []))
                 $this->getLogger(__METHOD__)->error('BwElasticExportGoogleShopping::logs.fillRowError', [
                     'errorList' => $this->errorBatch['rowError']
                 ]);
