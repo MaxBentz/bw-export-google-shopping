@@ -192,7 +192,7 @@ class GoogleShopping extends CSVPluginGenerator
                 $resultList = $elasticSearch->execute();
                 $shardIterator++;
 
-                if(count($resultList['error'] ?? []) > 0)
+                if(count($resultList['error'] ?? []) > 0){
                     $this->getLogger(__METHOD__)
                         ->addReference('failedShard', $shardIterator)
                         ->error('BwElasticExportGoogleShopping::log.esError', [
@@ -258,7 +258,7 @@ class GoogleShopping extends CSVPluginGenerator
                 }
             } while ($elasticSearch->hasNext());
 
-        if(is_array($this->errorBatch) && count($this->errorBatch['rowError'] ?? []))
+        if(is_array($this->errorBatch) && count($this->errorBatch['rowError'] ?? [])){
                 $this->getLogger(__METHOD__)->error('BwElasticExportGoogleShopping::logs.fillRowError', [
                     'errorList' => $this->errorBatch['rowError']
                 ]);
