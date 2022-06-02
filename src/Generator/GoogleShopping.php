@@ -404,6 +404,7 @@ class GoogleShopping extends CSVPluginGenerator
             }
             else{
                 $product_weight = $variation['data']['variation']['weightNetG'] / 1000 . " kg";
+                $product_weight = str_replace(".",",", $product_weight);
             }
         }
 
