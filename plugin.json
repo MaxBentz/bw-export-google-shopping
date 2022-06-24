@@ -19,5 +19,8 @@
   "author": "plentysystems AG",
   "authorIcon": "icon_author_xs.png",
   "serviceProvider": "BwElasticExportGoogleShopping\\BwElasticExportGoogleShoppingServiceProvider",
-  "require": ["ElasticExport"]
+  "require": ["ElasticExport"],
+  "platform": {
+    "php": ">=7.3 <8.1"
+  }
 }
