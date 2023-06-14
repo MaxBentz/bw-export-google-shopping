@@ -192,7 +192,7 @@ class GoogleShopping extends CSVPluginGenerator
                 $resultList = $elasticSearch->execute();
                 $shardIterator++;
 
-                if(!empty($resultList['error']) && is_array($resultList['error']) && count($resultList['error'])){
+                if (!empty($resultList['error']) && is_array($resultList['error']) && count($resultList['error'])) {
                     $this->getLogger(__METHOD__)
                         ->addReference('failedShard', $shardIterator)
                         ->error('BwElasticExportGoogleShopping::log.esError', [
@@ -235,7 +235,7 @@ class GoogleShopping extends CSVPluginGenerator
                         }
 
                         try {
-                            $this->buildRow($variation, $settings);
+                            $this->buildRow($variation, $settings, $lines + 1);
                         } catch (\Throwable $throwable) {
                             $this->errorBatch['rowError'][] = [
                                 'Error message ' => $throwable->getMessage(),
@@ -258,8 +258,8 @@ class GoogleShopping extends CSVPluginGenerator
                 }
             } while ($elasticSearch->hasNext());
 
-        if(is_array($this->errorBatch) && !empty($this->errorBatch['rowError'])
-            && is_array($this->errorBatch['rowError']) && count($this->errorBatch['rowError'])){
+            if (is_array($this->errorBatch) && !empty($this->errorBatch['rowError'])
+                && is_array($this->errorBatch['rowError']) && count($this->errorBatch['rowError'])) {
                 $this->getLogger(__METHOD__)->error('BwElasticExportGoogleShopping::logs.fillRowError', [
                     'errorList' => $this->errorBatch['rowError']
                 ]);
@@ -273,7 +273,7 @@ class GoogleShopping extends CSVPluginGenerator
      * @param array $variation
      * @param KeyValue $settings
      */
-    private function buildRow($variation, $settings)
+    private function buildRow($variation, $settings, $counter)
     {
         $variationAttributes = $this->attributeHelper->getVariationAttributes($variation, $settings);
 
@@ -400,10 +400,9 @@ class GoogleShopping extends CSVPluginGenerator
             $product_height = $product_height . " cm";
         }
         if ($variation['data']['variation']['weightNetG'] > 0) {
-            if($variation['data']['variation']['weightNetG'] < 2000){
+            if ($variation['data']['variation']['weightNetG'] < 2000) {
                 $product_weight = $variation['data']['variation']['weightNetG'] . " g";
-            }
-            else{
+            } else {
                 $product_weight = $variation['data']['variation']['weightNetG'] / 1000 . " kg";
             }
         }
@@ -455,6 +454,7 @@ class GoogleShopping extends CSVPluginGenerator
             'custom_label_3' => $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_3, self::GOOGLE_SHOPPING, $settings->get('lang')),
             'custom_label_4' => $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_4, self::GOOGLE_SHOPPING, $settings->get('lang')),
             'availability_​date' => $this->elasticExportHelper->getReleaseDate($variation),
+            'counter_id' => $counter,
         ];
 
         $this->addCSVContent(array_values($data));
@@ -584,7 +584,8 @@ class GoogleShopping extends CSVPluginGenerator
             'custom_label_2',
             'custom_label_3',
             'custom_label_4',
-            'availability_date'
+            'availability_date',
+            'counter_id'
         ];
     }
 }
