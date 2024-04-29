@@ -10,7 +10,7 @@
     "de": "BW Google Shopping",
     "en": "BW Google Shopping"
   },
-  "description": "This plugin adds the format GoogleShopping to the Elastic Export. 1.2.14",
+  "description": "This plugin adds the format GoogleShopping to the Elastic Export. 1.2.15",
   "shortDescription": {
     "de": "Die Integration des Datenformats GoogleShopping-Plugin ermöglicht die Artikeldatenübertragung zum Preisportal Google Shopping über den elastischen Export.",
     "en": "The integration of the data format GoogleShopping-Plugin enables the transfer of item data to the price search engine Google Shopping via the elastic export."
