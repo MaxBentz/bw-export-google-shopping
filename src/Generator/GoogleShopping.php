@@ -454,8 +454,7 @@ class GoogleShopping extends CSVPluginGenerator
             'custom_label_3' => $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_3, self::GOOGLE_SHOPPING, $settings->get('lang')),
             'custom_label_4' => $this->elasticExportPropertyHelper->getProperty($variation, self::CHARACTER_TYPE_CUSTOM_LABEL_4, self::GOOGLE_SHOPPING, $settings->get('lang')),
             'availability_​date' => $this->elasticExportHelper->getReleaseDate($variation),
-            'counter_id' => $counter,
-            'free_shipping_threshold' => 'DE:50 EUR'
+            'counter_id' => $counter
         ];
 
         $this->addCSVContent(array_values($data));
@@ -586,8 +585,7 @@ class GoogleShopping extends CSVPluginGenerator
             'custom_label_3',
             'custom_label_4',
             'availability_date',
-            'counter_id',
-            'free_shipping_threshold'
+            'counter_id'
         ];
     }
 }
